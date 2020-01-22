@@ -87,6 +87,7 @@ public class InitialGroupInfoService {
         public InitialGISImpl(ORB orb) throws RemoteException {   
             super() ;      
             this.orb = orb;     
+            ((javax.rmi.CORBA.Stub)toStub(this)).connect(orb);
         }
         
         @InfoMethod
