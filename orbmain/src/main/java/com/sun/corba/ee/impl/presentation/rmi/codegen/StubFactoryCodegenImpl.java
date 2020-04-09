@@ -19,7 +19,6 @@ import com.sun.corba.ee.spi.presentation.rmi.PresentationManager;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.security.AccessController;
-import java.security.ProtectionDomain;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedExceptionAction;
 import java.util.Map;
@@ -69,17 +68,7 @@ public class StubFactoryCodegenImpl extends StubFactoryDynamicBase
     }
 
     private Class<?> createStubClass(CodegenProxyCreator creator) {
-        final Class<?> theClass = classData.getMyClass();
-        final ProtectionDomain pd = 
-            AccessController.doPrivileged(
-                 new PrivilegedAction<ProtectionDomain>() {
-                     public ProtectionDomain run() {
-                         return theClass.getProtectionDomain() ;
-                     }
-                 }
-            ) ;
-        return creator.create( pd, loader, pm.getDebug(), pm.getPrintStream() ) ;
-//        return creator.create(classData.getMyClass(), pm.getDebug(), pm.getPrintStream());
+        return creator.create(classData.getMyClass(), pm.getDebug(), pm.getPrintStream());
     }
 
     public org.omg.CORBA.Object makeStub() {
