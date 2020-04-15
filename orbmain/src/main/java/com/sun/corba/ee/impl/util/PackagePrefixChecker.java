@@ -39,7 +39,7 @@ public final class PackagePrefixChecker
 
     public static boolean hasOffendingPrefix(String p)
     {
-        return p.startsWith("java.") || p.startsWith("javax.") ;
+        return p.startsWith("java.") || (p.startsWith("javax.") && !p.startsWith("javax.management.j2ee.")) ;
     }
 
     public static boolean hasBeenPrefixed(String p)
